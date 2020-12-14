@@ -7,7 +7,7 @@ prog
     ;
 
 mainProg
-    : main LPAREN RPAREN LBRACE codeBlock* RBRACE
+    : main LPAREN RPAREN LBRACE codeBlock? RBRACE
     ;
 
 main
@@ -16,10 +16,23 @@ main
 
 
 codeBlock
-    : (declaration)
+    : (declaration | scan | print)*
+    ;
+
+scan
+    : SCAN LPAREN TEXT COMMA ID RPAREN SEMICOLON
+    ;
+
+print
+    : PRINT LPAREN TEXT (ADD ID)? RPAREN SEMICOLON
     ;
 
 declaration
+    : normalDeclaration
+    | arrayDeclaration
+    ;
+
+normalDeclaration
     : intDeclaration
     | floatDeclaration
     | stringDeclaration
@@ -27,11 +40,28 @@ declaration
     ;
 
 intDeclaration
-    : INT ID ASSIGN DIGIT SEMICOLON
+    : INT ID intFormatDeclaration SEMICOLON
     ;
 
 floatDeclaration
     : FLOAT ID ASSIGN floatFormatDeclaration SEMICOLON
+    ;
+
+floatF
+    : F
+    ;
+
+stringDeclaration
+    : STRING ID stringFormatDeclaration SEMICOLON
+    ;
+
+booleanDeclaration
+    : BOOL ID boolFormatDeclaration SEMICOLON
+    | BOOL ID boolFormatDeclaration SEMICOLON
+    ;
+
+intFormatDeclaration
+    : ASSIGN DIGIT
     ;
 
 floatFormatDeclaration
@@ -41,20 +71,37 @@ floatFormatDeclaration
     | DIGIT PERIOD DIGIT+ floatF
     ;
 
-floatF
-    : F
+boolFormatDeclaration
+    : ASSIGN TRUE
+    | ASSIGN FALSE
     ;
 
-stringDeclaration
-    : STRING ID ASSIGN TEXT SEMICOLON
+stringFormatDeclaration
+    : ASSIGN TEXT
     ;
 
-booleanDeclaration
-    : BOOL ID ASSIGN TRUE SEMICOLON
-    | BOOL ID ASSIGN FALSE SEMICOLON
+arrayDeclaration
+    : intArrDeclaration
+    | floatArrDeclaration
+    | stringArrDeclaration
+    | boolArrDeclaration
     ;
 
+intArrDeclaration
+    : INT LBRAK RBRAK ID ASSIGN CREATE INT LBRAK DIGIT RBRAK SEMICOLON
+    ;
 
+floatArrDeclaration
+    : FLOAT LBRAK RBRAK ID ASSIGN CREATE FLOAT LBRAK DIGIT RBRAK SEMICOLON
+    ;
+
+stringArrDeclaration
+    : STRING LBRAK RBRAK ID ASSIGN CREATE STRING LBRAK DIGIT RBRAK SEMICOLON
+    ;
+
+boolArrDeclaration
+    : BOOL LBRAK RBRAK ID ASSIGN CREATE BOOL LBRAK DIGIT RBRAK SEMICOLON
+    ;
 
 fragment
 SPACE
