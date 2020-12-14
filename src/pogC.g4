@@ -1,5 +1,14 @@
 grammar pogC;
 
+/*PRODUCTION RULES */
+
+
+
+
+
+
+
+
 /*KEYWORD DECLARATION*/
 INT : 'int';
 FLOAT : 'float';
@@ -58,6 +67,11 @@ PERIOD : ',';
 /*TOKENS??*/
 DIGIT : '0' | '-'?[1-9][0-9]*;
 ID : [a-z][a-zA-Z0-9]*;
+
+/*STUFF FOR THE CUSTOM FOR LOOP OF THE TEST CASE*/
+UP : 'up';
+DOWN: 'down';
+TO: 'to';
 
 /*SKIPS*/
 SLCOMMENT : '##' ~[\t\r\n]* -> skip;
