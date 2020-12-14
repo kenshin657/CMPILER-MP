@@ -2,6 +2,47 @@ grammar pogC;
 
 /*PRODUCTION RULES */
 
+prog
+    : mainProg EOF
+    ;
+
+mainProg
+    : main LPAREN RPAREN LBRACE codeBlock* RBRACE
+    ;
+
+main
+    : MAIN
+    ;
+
+codeBlock
+    : (declaration)
+    ;
+
+declaration
+    : intDeclaration
+    | floatDeclaration
+    | stringDeclaration
+    | booleanDeclaration
+    ;
+
+intDeclaration
+    : INT ID ASSIGN DIGIT SEMICOLON
+    ;
+
+floatDeclaration
+    : FLOAT ID ASSIGN DIGIT PERIOD DIGIT SEMICOLON
+    ;
+
+stringDeclaration
+    : STRING ID ASSIGN QUOTMARK ID QUOTMARK SEMICOLON
+    | STRING ID ASSIGN SINGLEQUOTE ID SINGLEQUOTE SEMICOLON
+    ;
+
+booleanDeclaration
+    : BOOL ID ASSIGN TRUE SEMICOLON
+    | BOOL ID ASSIGN FALSE SEMICOLON
+    ;
+
 
 
 
@@ -13,7 +54,7 @@ grammar pogC;
 INT : 'int';
 FLOAT : 'float';
 STRING : 'String';
-BOOL : 'boolean';
+BOOL : 'bool';
 VOID : 'void';
 
 MAIN : 'main';
@@ -53,6 +94,8 @@ AND : '&&';
 OR : '||';
 LESSEQ : '<=';
 GREATEQ : '>=';
+TRUE : 'T';
+FALSE : 'F';
 
 /*SPECIAL SYMBOLS*/
 LPAREN : '(';
@@ -63,6 +106,8 @@ LBRACE : '{';
 RBRACE : '}';
 SEMICOLON : ';';
 PERIOD : ',';
+QUOTMARK : '"';
+SINGLEQUOTE : '`';
 
 /*TOKENS??*/
 DIGIT : '0' | '-'?[1-9][0-9]*;
@@ -74,5 +119,5 @@ DOWN: 'down';
 TO: 'to';
 
 /*SKIPS*/
-SLCOMMENT : '##' ~[\t\r\n]* -> skip;
+SLCOMMENT : '//' ~[\t\r\n]* -> skip;
 WS : [\t\n]+ -> skip;
