@@ -52,4 +52,6 @@ LBRAK : '[';
 RBRAK : ']';
 LBRACE : '{';
 RBRACE : '}';
+SEMICOLON : ';';
+PERIOD : ',';
 
