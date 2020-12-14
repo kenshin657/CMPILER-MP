@@ -52,6 +52,18 @@ public interface pogCVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFloatDeclaration(pogCParser.FloatDeclarationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link pogCParser#floatFormatDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFloatFormatDeclaration(pogCParser.FloatFormatDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link pogCParser#floatF}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFloatF(pogCParser.FloatFContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link pogCParser#stringDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

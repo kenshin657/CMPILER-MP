@@ -77,6 +77,26 @@ public interface pogCListener extends ParseTreeListener {
 	 */
 	void exitFloatDeclaration(pogCParser.FloatDeclarationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link pogCParser#floatFormatDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterFloatFormatDeclaration(pogCParser.FloatFormatDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link pogCParser#floatFormatDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitFloatFormatDeclaration(pogCParser.FloatFormatDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link pogCParser#floatF}.
+	 * @param ctx the parse tree
+	 */
+	void enterFloatF(pogCParser.FloatFContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link pogCParser#floatF}.
+	 * @param ctx the parse tree
+	 */
+	void exitFloatF(pogCParser.FloatFContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link pogCParser#stringDeclaration}.
 	 * @param ctx the parse tree
 	 */

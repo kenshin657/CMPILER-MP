@@ -17,46 +17,48 @@ public class pogCParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		INT=1, FLOAT=2, STRING=3, BOOL=4, VOID=5, MAIN=6, IF=7, ELSE=8, THEN=9, 
-		RETURN=10, WHILE=11, FUNC=12, PRINT=13, SCAN=14, DO=15, FOR=16, ADD=17, 
-		MULT=18, DIV=19, SUBT=20, MOD=21, ASSIGN=22, ADD_ASSIGN=23, SUB_ASSIGN=24, 
-		MULT_ASSIGN=25, DIV_ASSIGN=26, INCR=27, DECR=28, EQUAL_EQUAL=29, GT=30, 
-		LT=31, NOTEQUAL=32, AND=33, OR=34, LESSEQ=35, GREATEQ=36, TRUE=37, FALSE=38, 
-		LPAREN=39, RPAREN=40, LBRAK=41, RBRAK=42, LBRACE=43, RBRACE=44, SEMICOLON=45, 
-		PERIOD=46, QUOTMARK=47, SINGLEQUOTE=48, DIGIT=49, ID=50, UP=51, DOWN=52, 
-		TO=53, SLCOMMENT=54, WS=55;
+		RETURN=10, WHILE=11, FUNC=12, PRINT=13, SCAN=14, DO=15, FOR=16, F=17, 
+		CREATE=18, ADD=19, MULT=20, DIV=21, SUBT=22, MOD=23, ASSIGN=24, ADD_ASSIGN=25, 
+		SUB_ASSIGN=26, MULT_ASSIGN=27, DIV_ASSIGN=28, INCR=29, DECR=30, EQUAL_EQUAL=31, 
+		GT=32, LT=33, NOTEQUAL=34, AND=35, OR=36, LESSEQ=37, GREATEQ=38, TRUE=39, 
+		FALSE=40, LPAREN=41, RPAREN=42, LBRAK=43, RBRAK=44, LBRACE=45, RBRACE=46, 
+		SEMICOLON=47, PERIOD=48, QUOTMARK=49, SINGLEQUOTE=50, COMMA=51, DIGIT=52, 
+		ID=53, TEXT=54, UP=55, DOWN=56, TO=57, SLCOMMENT=58, WS=59;
 	public static final int
 		RULE_prog = 0, RULE_mainProg = 1, RULE_main = 2, RULE_codeBlock = 3, RULE_declaration = 4, 
-		RULE_intDeclaration = 5, RULE_floatDeclaration = 6, RULE_stringDeclaration = 7, 
-		RULE_booleanDeclaration = 8;
+		RULE_intDeclaration = 5, RULE_floatDeclaration = 6, RULE_floatFormatDeclaration = 7, 
+		RULE_floatF = 8, RULE_stringDeclaration = 9, RULE_booleanDeclaration = 10;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"prog", "mainProg", "main", "codeBlock", "declaration", "intDeclaration", 
-			"floatDeclaration", "stringDeclaration", "booleanDeclaration"
+			"floatDeclaration", "floatFormatDeclaration", "floatF", "stringDeclaration", 
+			"booleanDeclaration"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'int'", "'float'", "'String'", "'boolean'", "'void'", "'main'", 
-			"'if'", "'else'", "'then'", "'return'", "'while'", "'func'", "'print'", 
-			"'scan'", "'do'", "'for'", "'+'", "'*'", "'/'", "'-'", "'%'", "'='", 
-			"'+='", "'-='", "'*='", "'/='", "'++'", "'--'", "'=='", "'>'", "'<'", 
-			"'!='", "'&&'", "'||'", "'<='", "'>='", "'T'", "'F'", "'('", "')'", "'['", 
-			"']'", "'{'", "'}'", "';'", "','", "'\"'", "'`'", null, null, "'up'", 
-			"'down'", "'to'"
+			null, "'int'", "'float'", "'String'", "'bool'", "'void'", "'main'", "'if'", 
+			"'else'", "'then'", "'return'", "'while'", "'func'", "'print'", "'scan'", 
+			"'do'", "'for'", "'f'", "'create'", "'+'", "'*'", "'/'", "'-'", "'%'", 
+			"'='", "'+='", "'-='", "'*='", "'/='", "'++'", "'--'", "'=='", "'>'", 
+			"'<'", "'!='", "'&&'", "'||'", "'<='", "'>='", "'T'", "'F'", "'('", "')'", 
+			"'['", "']'", "'{'", "'}'", "';'", "'.'", "'\"'", "'`'", "','", null, 
+			null, null, "'up'", "'down'", "'to'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "INT", "FLOAT", "STRING", "BOOL", "VOID", "MAIN", "IF", "ELSE", 
-			"THEN", "RETURN", "WHILE", "FUNC", "PRINT", "SCAN", "DO", "FOR", "ADD", 
-			"MULT", "DIV", "SUBT", "MOD", "ASSIGN", "ADD_ASSIGN", "SUB_ASSIGN", "MULT_ASSIGN", 
-			"DIV_ASSIGN", "INCR", "DECR", "EQUAL_EQUAL", "GT", "LT", "NOTEQUAL", 
-			"AND", "OR", "LESSEQ", "GREATEQ", "TRUE", "FALSE", "LPAREN", "RPAREN", 
-			"LBRAK", "RBRAK", "LBRACE", "RBRACE", "SEMICOLON", "PERIOD", "QUOTMARK", 
-			"SINGLEQUOTE", "DIGIT", "ID", "UP", "DOWN", "TO", "SLCOMMENT", "WS"
+			"THEN", "RETURN", "WHILE", "FUNC", "PRINT", "SCAN", "DO", "FOR", "F", 
+			"CREATE", "ADD", "MULT", "DIV", "SUBT", "MOD", "ASSIGN", "ADD_ASSIGN", 
+			"SUB_ASSIGN", "MULT_ASSIGN", "DIV_ASSIGN", "INCR", "DECR", "EQUAL_EQUAL", 
+			"GT", "LT", "NOTEQUAL", "AND", "OR", "LESSEQ", "GREATEQ", "TRUE", "FALSE", 
+			"LPAREN", "RPAREN", "LBRAK", "RBRAK", "LBRACE", "RBRACE", "SEMICOLON", 
+			"PERIOD", "QUOTMARK", "SINGLEQUOTE", "COMMA", "DIGIT", "ID", "TEXT", 
+			"UP", "DOWN", "TO", "SLCOMMENT", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -140,9 +142,9 @@ public class pogCParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(18);
+			setState(22);
 			mainProg();
-			setState(19);
+			setState(23);
 			match(EOF);
 			}
 		}
@@ -197,29 +199,29 @@ public class pogCParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(21);
+			setState(25);
 			main();
-			setState(22);
+			setState(26);
 			match(LPAREN);
-			setState(23);
+			setState(27);
 			match(RPAREN);
-			setState(24);
-			match(LBRACE);
 			setState(28);
+			match(LBRACE);
+			setState(32);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << FLOAT) | (1L << STRING) | (1L << BOOL))) != 0)) {
 				{
 				{
-				setState(25);
+				setState(29);
 				codeBlock();
 				}
 				}
-				setState(30);
+				setState(34);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(31);
+			setState(35);
 			match(RBRACE);
 			}
 		}
@@ -261,7 +263,7 @@ public class pogCParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(33);
+			setState(37);
 			match(MAIN);
 			}
 		}
@@ -306,7 +308,7 @@ public class pogCParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(35);
+			setState(39);
 			declaration();
 			}
 			}
@@ -358,34 +360,34 @@ public class pogCParser extends Parser {
 		DeclarationContext _localctx = new DeclarationContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_declaration);
 		try {
-			setState(41);
+			setState(45);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(37);
+				setState(41);
 				intDeclaration();
 				}
 				break;
 			case FLOAT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(38);
+				setState(42);
 				floatDeclaration();
 				}
 				break;
 			case STRING:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(39);
+				setState(43);
 				stringDeclaration();
 				}
 				break;
 			case BOOL:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(40);
+				setState(44);
 				booleanDeclaration();
 				}
 				break;
@@ -435,15 +437,15 @@ public class pogCParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(43);
-			match(INT);
-			setState(44);
-			match(ID);
-			setState(45);
-			match(ASSIGN);
-			setState(46);
-			match(DIGIT);
 			setState(47);
+			match(INT);
+			setState(48);
+			match(ID);
+			setState(49);
+			match(ASSIGN);
+			setState(50);
+			match(DIGIT);
+			setState(51);
 			match(SEMICOLON);
 			}
 		}
@@ -462,11 +464,9 @@ public class pogCParser extends Parser {
 		public TerminalNode FLOAT() { return getToken(pogCParser.FLOAT, 0); }
 		public TerminalNode ID() { return getToken(pogCParser.ID, 0); }
 		public TerminalNode ASSIGN() { return getToken(pogCParser.ASSIGN, 0); }
-		public List<TerminalNode> DIGIT() { return getTokens(pogCParser.DIGIT); }
-		public TerminalNode DIGIT(int i) {
-			return getToken(pogCParser.DIGIT, i);
+		public FloatFormatDeclarationContext floatFormatDeclaration() {
+			return getRuleContext(FloatFormatDeclarationContext.class,0);
 		}
-		public TerminalNode PERIOD() { return getToken(pogCParser.PERIOD, 0); }
 		public TerminalNode SEMICOLON() { return getToken(pogCParser.SEMICOLON, 0); }
 		public FloatDeclarationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -493,20 +493,199 @@ public class pogCParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(49);
-			match(FLOAT);
-			setState(50);
-			match(ID);
-			setState(51);
-			match(ASSIGN);
-			setState(52);
-			match(DIGIT);
 			setState(53);
-			match(PERIOD);
+			match(FLOAT);
 			setState(54);
-			match(DIGIT);
+			match(ID);
 			setState(55);
+			match(ASSIGN);
+			setState(56);
+			floatFormatDeclaration();
+			setState(57);
 			match(SEMICOLON);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class FloatFormatDeclarationContext extends ParserRuleContext {
+		public List<TerminalNode> DIGIT() { return getTokens(pogCParser.DIGIT); }
+		public TerminalNode DIGIT(int i) {
+			return getToken(pogCParser.DIGIT, i);
+		}
+		public TerminalNode PERIOD() { return getToken(pogCParser.PERIOD, 0); }
+		public FloatFContext floatF() {
+			return getRuleContext(FloatFContext.class,0);
+		}
+		public FloatFormatDeclarationContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_floatFormatDeclaration; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof pogCListener ) ((pogCListener)listener).enterFloatFormatDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof pogCListener ) ((pogCListener)listener).exitFloatFormatDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof pogCVisitor ) return ((pogCVisitor<? extends T>)visitor).visitFloatFormatDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final FloatFormatDeclarationContext floatFormatDeclaration() throws RecognitionException {
+		FloatFormatDeclarationContext _localctx = new FloatFormatDeclarationContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_floatFormatDeclaration);
+		int _la;
+		try {
+			setState(87);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(59);
+				match(DIGIT);
+				setState(60);
+				match(PERIOD);
+				setState(62); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				do {
+					{
+					{
+					setState(61);
+					match(DIGIT);
+					}
+					}
+					setState(64); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				} while ( _la==DIGIT );
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(66);
+				match(PERIOD);
+				setState(68); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				do {
+					{
+					{
+					setState(67);
+					match(DIGIT);
+					}
+					}
+					setState(70); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				} while ( _la==DIGIT );
+				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(72);
+				match(PERIOD);
+				setState(74); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				do {
+					{
+					{
+					setState(73);
+					match(DIGIT);
+					}
+					}
+					setState(76); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				} while ( _la==DIGIT );
+				setState(78);
+				floatF();
+				}
+				break;
+			case 4:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(79);
+				match(DIGIT);
+				setState(80);
+				match(PERIOD);
+				setState(82); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				do {
+					{
+					{
+					setState(81);
+					match(DIGIT);
+					}
+					}
+					setState(84); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				} while ( _la==DIGIT );
+				setState(86);
+				floatF();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class FloatFContext extends ParserRuleContext {
+		public TerminalNode F() { return getToken(pogCParser.F, 0); }
+		public FloatFContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_floatF; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof pogCListener ) ((pogCListener)listener).enterFloatF(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof pogCListener ) ((pogCListener)listener).exitFloatF(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof pogCVisitor ) return ((pogCVisitor<? extends T>)visitor).visitFloatF(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final FloatFContext floatF() throws RecognitionException {
+		FloatFContext _localctx = new FloatFContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_floatF);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(89);
+			match(F);
 			}
 		}
 		catch (RecognitionException re) {
@@ -522,20 +701,10 @@ public class pogCParser extends Parser {
 
 	public static class StringDeclarationContext extends ParserRuleContext {
 		public TerminalNode STRING() { return getToken(pogCParser.STRING, 0); }
-		public List<TerminalNode> ID() { return getTokens(pogCParser.ID); }
-		public TerminalNode ID(int i) {
-			return getToken(pogCParser.ID, i);
-		}
+		public TerminalNode ID() { return getToken(pogCParser.ID, 0); }
 		public TerminalNode ASSIGN() { return getToken(pogCParser.ASSIGN, 0); }
-		public List<TerminalNode> QUOTMARK() { return getTokens(pogCParser.QUOTMARK); }
-		public TerminalNode QUOTMARK(int i) {
-			return getToken(pogCParser.QUOTMARK, i);
-		}
+		public TerminalNode TEXT() { return getToken(pogCParser.TEXT, 0); }
 		public TerminalNode SEMICOLON() { return getToken(pogCParser.SEMICOLON, 0); }
-		public List<TerminalNode> SINGLEQUOTE() { return getTokens(pogCParser.SINGLEQUOTE); }
-		public TerminalNode SINGLEQUOTE(int i) {
-			return getToken(pogCParser.SINGLEQUOTE, i);
-		}
 		public StringDeclarationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -557,49 +726,20 @@ public class pogCParser extends Parser {
 
 	public final StringDeclarationContext stringDeclaration() throws RecognitionException {
 		StringDeclarationContext _localctx = new StringDeclarationContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_stringDeclaration);
+		enterRule(_localctx, 18, RULE_stringDeclaration);
 		try {
-			setState(71);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(57);
-				match(STRING);
-				setState(58);
-				match(ID);
-				setState(59);
-				match(ASSIGN);
-				setState(60);
-				match(QUOTMARK);
-				setState(61);
-				match(ID);
-				setState(62);
-				match(QUOTMARK);
-				setState(63);
-				match(SEMICOLON);
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(64);
-				match(STRING);
-				setState(65);
-				match(ID);
-				setState(66);
-				match(ASSIGN);
-				setState(67);
-				match(SINGLEQUOTE);
-				setState(68);
-				match(ID);
-				setState(69);
-				match(SINGLEQUOTE);
-				setState(70);
-				match(SEMICOLON);
-				}
-				break;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(91);
+			match(STRING);
+			setState(92);
+			match(ID);
+			setState(93);
+			match(ASSIGN);
+			setState(94);
+			match(TEXT);
+			setState(95);
+			match(SEMICOLON);
 			}
 		}
 		catch (RecognitionException re) {
@@ -641,38 +781,38 @@ public class pogCParser extends Parser {
 
 	public final BooleanDeclarationContext booleanDeclaration() throws RecognitionException {
 		BooleanDeclarationContext _localctx = new BooleanDeclarationContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_booleanDeclaration);
+		enterRule(_localctx, 20, RULE_booleanDeclaration);
 		try {
-			setState(83);
+			setState(107);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(73);
+				setState(97);
 				match(BOOL);
-				setState(74);
+				setState(98);
 				match(ID);
-				setState(75);
+				setState(99);
 				match(ASSIGN);
-				setState(76);
+				setState(100);
 				match(TRUE);
-				setState(77);
+				setState(101);
 				match(SEMICOLON);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(78);
+				setState(102);
 				match(BOOL);
-				setState(79);
+				setState(103);
 				match(ID);
-				setState(80);
+				setState(104);
 				match(ASSIGN);
-				setState(81);
+				setState(105);
 				match(FALSE);
-				setState(82);
+				setState(106);
 				match(SEMICOLON);
 				}
 				break;
@@ -690,27 +830,33 @@ public class pogCParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\39X\4\2\t\2\4\3\t\3"+
-		"\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\3\2\3"+
-		"\3\3\3\3\3\3\3\3\3\7\3\35\n\3\f\3\16\3 \13\3\3\3\3\3\3\4\3\4\3\5\3\5\3"+
-		"\6\3\6\3\6\3\6\5\6,\n\6\3\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3"+
-		"\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\5\t"+
-		"J\n\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\nV\n\n\3\n\2\2\13\2\4"+
-		"\6\b\n\f\16\20\22\2\2\2T\2\24\3\2\2\2\4\27\3\2\2\2\6#\3\2\2\2\b%\3\2\2"+
-		"\2\n+\3\2\2\2\f-\3\2\2\2\16\63\3\2\2\2\20I\3\2\2\2\22U\3\2\2\2\24\25\5"+
-		"\4\3\2\25\26\7\2\2\3\26\3\3\2\2\2\27\30\5\6\4\2\30\31\7)\2\2\31\32\7*"+
-		"\2\2\32\36\7-\2\2\33\35\5\b\5\2\34\33\3\2\2\2\35 \3\2\2\2\36\34\3\2\2"+
-		"\2\36\37\3\2\2\2\37!\3\2\2\2 \36\3\2\2\2!\"\7.\2\2\"\5\3\2\2\2#$\7\b\2"+
-		"\2$\7\3\2\2\2%&\5\n\6\2&\t\3\2\2\2\',\5\f\7\2(,\5\16\b\2),\5\20\t\2*,"+
-		"\5\22\n\2+\'\3\2\2\2+(\3\2\2\2+)\3\2\2\2+*\3\2\2\2,\13\3\2\2\2-.\7\3\2"+
-		"\2./\7\64\2\2/\60\7\30\2\2\60\61\7\63\2\2\61\62\7/\2\2\62\r\3\2\2\2\63"+
-		"\64\7\4\2\2\64\65\7\64\2\2\65\66\7\30\2\2\66\67\7\63\2\2\678\7\60\2\2"+
-		"89\7\63\2\29:\7/\2\2:\17\3\2\2\2;<\7\5\2\2<=\7\64\2\2=>\7\30\2\2>?\7\61"+
-		"\2\2?@\7\64\2\2@A\7\61\2\2AJ\7/\2\2BC\7\5\2\2CD\7\64\2\2DE\7\30\2\2EF"+
-		"\7\62\2\2FG\7\64\2\2GH\7\62\2\2HJ\7/\2\2I;\3\2\2\2IB\3\2\2\2J\21\3\2\2"+
-		"\2KL\7\6\2\2LM\7\64\2\2MN\7\30\2\2NO\7\'\2\2OV\7/\2\2PQ\7\6\2\2QR\7\64"+
-		"\2\2RS\7\30\2\2ST\7(\2\2TV\7/\2\2UK\3\2\2\2UP\3\2\2\2V\23\3\2\2\2\6\36"+
-		"+IU";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3=p\4\2\t\2\4\3\t\3"+
+		"\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f"+
+		"\t\f\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\7\3!\n\3\f\3\16\3$\13\3\3\3\3\3\3"+
+		"\4\3\4\3\5\3\5\3\6\3\6\3\6\3\6\5\6\60\n\6\3\7\3\7\3\7\3\7\3\7\3\7\3\b"+
+		"\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\6\tA\n\t\r\t\16\tB\3\t\3\t\6\tG\n\t\r"+
+		"\t\16\tH\3\t\3\t\6\tM\n\t\r\t\16\tN\3\t\3\t\3\t\3\t\6\tU\n\t\r\t\16\t"+
+		"V\3\t\5\tZ\n\t\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3"+
+		"\f\3\f\3\f\3\f\3\f\3\f\5\fn\n\f\3\f\2\2\r\2\4\6\b\n\f\16\20\22\24\26\2"+
+		"\2\2p\2\30\3\2\2\2\4\33\3\2\2\2\6\'\3\2\2\2\b)\3\2\2\2\n/\3\2\2\2\f\61"+
+		"\3\2\2\2\16\67\3\2\2\2\20Y\3\2\2\2\22[\3\2\2\2\24]\3\2\2\2\26m\3\2\2\2"+
+		"\30\31\5\4\3\2\31\32\7\2\2\3\32\3\3\2\2\2\33\34\5\6\4\2\34\35\7+\2\2\35"+
+		"\36\7,\2\2\36\"\7/\2\2\37!\5\b\5\2 \37\3\2\2\2!$\3\2\2\2\" \3\2\2\2\""+
+		"#\3\2\2\2#%\3\2\2\2$\"\3\2\2\2%&\7\60\2\2&\5\3\2\2\2\'(\7\b\2\2(\7\3\2"+
+		"\2\2)*\5\n\6\2*\t\3\2\2\2+\60\5\f\7\2,\60\5\16\b\2-\60\5\24\13\2.\60\5"+
+		"\26\f\2/+\3\2\2\2/,\3\2\2\2/-\3\2\2\2/.\3\2\2\2\60\13\3\2\2\2\61\62\7"+
+		"\3\2\2\62\63\7\67\2\2\63\64\7\32\2\2\64\65\7\66\2\2\65\66\7\61\2\2\66"+
+		"\r\3\2\2\2\678\7\4\2\289\7\67\2\29:\7\32\2\2:;\5\20\t\2;<\7\61\2\2<\17"+
+		"\3\2\2\2=>\7\66\2\2>@\7\62\2\2?A\7\66\2\2@?\3\2\2\2AB\3\2\2\2B@\3\2\2"+
+		"\2BC\3\2\2\2CZ\3\2\2\2DF\7\62\2\2EG\7\66\2\2FE\3\2\2\2GH\3\2\2\2HF\3\2"+
+		"\2\2HI\3\2\2\2IZ\3\2\2\2JL\7\62\2\2KM\7\66\2\2LK\3\2\2\2MN\3\2\2\2NL\3"+
+		"\2\2\2NO\3\2\2\2OP\3\2\2\2PZ\5\22\n\2QR\7\66\2\2RT\7\62\2\2SU\7\66\2\2"+
+		"TS\3\2\2\2UV\3\2\2\2VT\3\2\2\2VW\3\2\2\2WX\3\2\2\2XZ\5\22\n\2Y=\3\2\2"+
+		"\2YD\3\2\2\2YJ\3\2\2\2YQ\3\2\2\2Z\21\3\2\2\2[\\\7\23\2\2\\\23\3\2\2\2"+
+		"]^\7\5\2\2^_\7\67\2\2_`\7\32\2\2`a\78\2\2ab\7\61\2\2b\25\3\2\2\2cd\7\6"+
+		"\2\2de\7\67\2\2ef\7\32\2\2fg\7)\2\2gn\7\61\2\2hi\7\6\2\2ij\7\67\2\2jk"+
+		"\7\32\2\2kl\7*\2\2ln\7\61\2\2mc\3\2\2\2mh\3\2\2\2n\27\3\2\2\2\n\"/BHN"+
+		"VYm";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

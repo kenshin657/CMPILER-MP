@@ -14,6 +14,7 @@ main
     : MAIN
     ;
 
+
 codeBlock
     : (declaration)
     ;
@@ -34,13 +35,18 @@ floatDeclaration
     ;
 
 floatFormatDeclaration
-    : DIGIT PERIOD DIGIT
-    | PERIOD DIGIT
+    : DIGIT PERIOD DIGIT+
+    | PERIOD DIGIT+
+    | PERIOD DIGIT+ floatF
+    | DIGIT PERIOD DIGIT+ floatF
+    ;
+
+floatF
+    : F
     ;
 
 stringDeclaration
-    : STRING ID ASSIGN QUOTMARK ID QUOTMARK SEMICOLON
-    | STRING ID ASSIGN SINGLEQUOTE ID SINGLEQUOTE SEMICOLON
+    : STRING ID ASSIGN TEXT SEMICOLON
     ;
 
 booleanDeclaration
@@ -50,10 +56,10 @@ booleanDeclaration
 
 
 
-
-
-
-
+fragment
+SPACE
+    : [ ]
+    ;
 
 /*KEYWORD DECLARATION*/
 INT : 'int';
@@ -73,6 +79,8 @@ PRINT : 'print';
 SCAN : 'scan';
 DO : 'do';
 FOR : 'for';
+F : 'f';
+CREATE : 'create';
 
 /*OPERATORS*/
 ADD : '+';
@@ -117,7 +125,8 @@ COMMA : ',';
 
 /*TOKENS??*/
 DIGIT : '0' | '-'?[1-9][0-9]*;
-ID : [a-z][a-zA-Z0-9]*;
+ID : '_'?[a-z][a-zA-Z0-9]*;
+TEXT : '"' ~'"'* '"' ;
 
 /*STUFF FOR THE CUSTOM FOR LOOP OF THE TEST CASE*/
 UP : 'up';
@@ -126,4 +135,4 @@ TO: 'to';
 
 /*SKIPS*/
 SLCOMMENT : '//' ~[\t\r\n]* -> skip;
-WS : [\t\n]+ -> skip;
+WS : [\r\t\n]+ -> skip;
