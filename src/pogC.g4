@@ -30,7 +30,12 @@ intDeclaration
     ;
 
 floatDeclaration
-    : FLOAT ID ASSIGN DIGIT PERIOD DIGIT SEMICOLON
+    : FLOAT ID ASSIGN floatFormatDeclaration SEMICOLON
+    ;
+
+floatFormatDeclaration
+    : DIGIT PERIOD DIGIT
+    | PERIOD DIGIT
     ;
 
 stringDeclaration
@@ -105,9 +110,10 @@ RBRAK : ']';
 LBRACE : '{';
 RBRACE : '}';
 SEMICOLON : ';';
-PERIOD : ',';
+PERIOD : '.';
 QUOTMARK : '"';
 SINGLEQUOTE : '`';
+COMMA : ',';
 
 /*TOKENS??*/
 DIGIT : '0' | '-'?[1-9][0-9]*;
