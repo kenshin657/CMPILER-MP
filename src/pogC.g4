@@ -55,3 +55,10 @@ RBRACE : '}';
 SEMICOLON : ';';
 PERIOD : ',';
 
+/*TOKENS??*/
+DIGIT : '0' | '-'?[1-9][0-9]*;
+ID : [a-z][a-zA-Z0-9]*;
+
+/*SKIPS*/
+SLCOMMENT : '##' ~[\t\r\n]* -> skip;
+WS : [\t\n]+ -> skip;
