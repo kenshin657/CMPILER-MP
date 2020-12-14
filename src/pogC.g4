@@ -16,7 +16,7 @@ main
 
 
 codeBlock
-    : (declaration | scan | print)*
+    : (declaration | scan | print | for)*
     ;
 
 scan
@@ -27,24 +27,29 @@ print
     : PRINT LPAREN TEXT (ADD ID)? RPAREN SEMICOLON
     ;
 
+for
+    : FOR intDeclaration UPTO ID LBRACE codeBlock? RBRACE
+    ;
+
+
 declaration
     : normalDeclaration
     | arrayDeclaration
     ;
 
 normalDeclaration
-    : intDeclaration
-    | floatDeclaration
-    | stringDeclaration
-    | booleanDeclaration
+    : intDeclaration SEMICOLON
+    | floatDeclaration SEMICOLON
+    | stringDeclaration SEMICOLON
+    | booleanDeclaration SEMICOLON
     ;
 
 intDeclaration
-    : INT ID intFormatDeclaration SEMICOLON
+    : INT ID intFormatDeclaration
     ;
 
 floatDeclaration
-    : FLOAT ID ASSIGN floatFormatDeclaration SEMICOLON
+    : FLOAT ID ASSIGN floatFormatDeclaration
     ;
 
 floatF
@@ -52,12 +57,12 @@ floatF
     ;
 
 stringDeclaration
-    : STRING ID stringFormatDeclaration SEMICOLON
+    : STRING ID stringFormatDeclaration
     ;
 
 booleanDeclaration
-    : BOOL ID boolFormatDeclaration SEMICOLON
-    | BOOL ID boolFormatDeclaration SEMICOLON
+    : BOOL ID boolFormatDeclaration
+    | BOOL ID boolFormatDeclaration
     ;
 
 intFormatDeclaration
@@ -107,6 +112,7 @@ fragment
 SPACE
     : [ ]
     ;
+
 
 /*KEYWORD DECLARATION*/
 INT : 'int';
@@ -176,8 +182,7 @@ ID : '_'?[a-z][a-zA-Z0-9]*;
 TEXT : '"' ~'"'* '"' ;
 
 /*STUFF FOR THE CUSTOM FOR LOOP OF THE TEST CASE*/
-UP : 'up';
-DOWN: 'down';
+UPTO : 'up to';
 TO: 'to';
 
 /*SKIPS*/
