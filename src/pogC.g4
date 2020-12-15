@@ -4,6 +4,7 @@ grammar pogC;
 
 prog
     : mainProg EOF
+    |functionDeclaration? mainProg EOF
     ;
 
 mainProg
@@ -14,9 +15,12 @@ main
     : MAIN
     ;
 
+functionDeclaration
+    :
+    ;
 
 codeBlock
-    : (declaration | scan | print | for)*
+    : (declaration | scan | print | for | operation)*
     ;
 
 scan
@@ -31,6 +35,24 @@ for
     : FOR intDeclaration UPTO ID LBRACE codeBlock? RBRACE
     ;
 
+operation
+    : ID ASSIGN opr SEMICOLON
+    | ID shortCutOpr SEMICOLON
+    ;
+
+opr
+    : opr POW opr
+    | opr (MULT | DIV) opr
+    | opr (ADD | SUBT) opr
+    | LPAREN opr RPAREN
+    | DIGIT
+    | ID
+    ;
+
+shortCutOpr
+    : INCR
+    | DECR
+    ;
 
 declaration
     : normalDeclaration
@@ -42,6 +64,14 @@ normalDeclaration
     | floatDeclaration SEMICOLON
     | stringDeclaration SEMICOLON
     | booleanDeclaration SEMICOLON
+    ;
+
+dataTyoe
+    : INT
+    | FLOAT
+    | STRING
+    | VOID
+    | BOOL
     ;
 
 intDeclaration
@@ -141,6 +171,7 @@ MULT : '*';
 DIV : '/';
 SUBT : '-';
 MOD : '%';
+POW :'^';
 
 /*ASSIGNMENT OPERATORS*/
 ASSIGN : '=';
