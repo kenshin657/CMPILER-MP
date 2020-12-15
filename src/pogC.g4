@@ -16,7 +16,21 @@ main
     ;
 
 functionDeclaration
-    :
+    : (FUNC dataType funcExpression LBRACE codeBlock? RBRACE)*
+    ;
+
+funcExpression
+    : LPAREN funcArgs RPAREN
+    ;
+
+funcArgs
+    : funcArgs arg
+    | arg
+    ;
+
+arg
+    : arg ','
+    | dataType ID
     ;
 
 codeBlock
@@ -66,7 +80,7 @@ normalDeclaration
     | booleanDeclaration SEMICOLON
     ;
 
-dataTyoe
+dataType
     : INT
     | FLOAT
     | STRING
