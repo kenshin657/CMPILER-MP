@@ -16,7 +16,19 @@ main
     ;
 
 functionDeclaration
-    : (FUNC dataType funcExpression LBRACE codeBlock? RBRACE)*
+    : ( funcInit returnExpresion? RBRACE)
+    ;
+
+returnExpresion
+    : return (opr | ID) SEMICOLON
+    ;
+
+return
+    : RETURN
+    ;
+
+funcInit
+    : FUNC dataType ID funcExpression LBRACE codeBlock?
     ;
 
 funcExpression
