@@ -11,9 +11,14 @@ public class PogCCustomErrorListener extends BaseErrorListener {
     private String generateCustomErrorMessage(String msg, int line, int charPositionInLine, Object offendingSymbol) {
         String tmp = "";
 
+
         if(msg.contains("mismatched input")) {
-            tmp = "PogC Syntax Error found at Line[" + line + "] CharacterPosition[" + charPositionInLine + "]: Please review " +
-                    "Offending Symbol" + offendingSymbol;
+            tmp = "PogC Syntax Error found at Line[" + line + "] CharacterPosition[" + charPositionInLine + "]: Please review ";
+
+        } else if (msg.contains("extraneous input")) {
+
+        } else if (msg.contains("no viable alternative at")) {
+
         }
         else
             tmp = "PogC Syntax Error Caught";
