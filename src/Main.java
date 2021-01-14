@@ -40,7 +40,6 @@ public class Main {
 
         parser.removeErrorListeners();
         parser.addErrorListener(new PogCCustomErrorListener());
-        parser.setErrorHandler(ExceptionErrorStrategy.INSTANCE);
 
         ParseTree tree = parser.prog();
         ParseTreeWalker walker = new ParseTreeWalker();
