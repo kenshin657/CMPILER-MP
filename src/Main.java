@@ -16,7 +16,7 @@ public class Main {
         try {
             InputStreamReader r = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(r);
-            System.out.print("Enter test file source: ");
+            System.out.print("Enter test case file path: ");
             this.filePath = br.readLine();
         } catch (IOException err) {
             err.printStackTrace();
@@ -28,13 +28,16 @@ public class Main {
     }
 
     public void parse() {
-        pogCLexer lexer = new pogCLexer(this.input);
+        PogCLexer lexer = new PogCLexer(this.input);
         TokenStream ts = new CommonTokenStream(lexer);
-        pogCParser parser = new pogCParser(ts);
+        PogCParser parser = new PogCParser(ts);
+
+        //parser.removeErrorListeners();
+        //parser.addErrorListener(new PogCCustomErrorListener());
 
         ParseTree tree = parser.prog();
         ParseTreeWalker walker = new ParseTreeWalker();
-        pogCBaseListener listener = new pogCBaseListener();
+        PogCBaseListener listener = new PogCBaseListener();
         walker.walk(listener, tree);
     }
 

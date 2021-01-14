@@ -1,4 +1,4 @@
-grammar pogC;
+grammar PogC;
 
 /*PRODUCTION RULES */
 
@@ -53,7 +53,7 @@ scan
     ;
 
 print
-    : PRINT LPAREN TEXT (ADD ID)? RPAREN SEMICOLON
+    : PRINT LPAREN TEXT (',' ID)* RPAREN SEMICOLON
     ;
 
 forLoop
