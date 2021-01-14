@@ -1,9 +1,9 @@
 grammar PogC;
 
-/*PRODUCTION RULES */
+/*PRODUCTION RULES send help*/
 
 prog
-    : functionDeclaration? mainProg EOF
+    : functionDeclaration* mainProg EOF
     ;
 
 mainProg
@@ -15,7 +15,7 @@ main
     ;
 
 functionDeclaration
-    : ( funcInit returnExpresion? RBRACE)+
+    : funcInit returnExpresion? RBRACE
     ;
 
 returnExpresion
@@ -52,7 +52,7 @@ arg
     ;
 
 codeBlock
-    : (declaration | scan | print | forLoop | operation | functionCall)*
+    : (declaration | scan | print | forLoop | operation | functionCall | condition)*
     ;
 
 functionCall
@@ -68,7 +68,11 @@ print
     ;
 
 forLoop
-    : FOR forDataTypeDeclaration (UPTO | TO) (ID | DIGIT) LBRACE codeBlock RBRACE
+    : FOR forDataTypeDeclaration (UPTO | TO) (ID | DIGIT) forBlock
+    ;
+
+forBlock
+    : LBRACE codeBlock RBRACE
     ;
 
 operation
@@ -81,7 +85,7 @@ opr
     | opr (MULT | DIV) opr
     | opr (ADD | SUBT) opr
     | LPAREN opr RPAREN
-    | DIGIT
+    | DIGIT (PERIOD DIGIT (floatF)?)?
     | ID
     ;
 
@@ -117,9 +121,8 @@ intDeclaration
     ;
 
 forDataTypeDeclaration
-    : INT ID intFormatDeclaration
-    | INT ID ASSIGN opr
-    | FLOAT ID floatFormatDeclaration
+    : INT ID ASSIGN DIGIT+
+    | ID
     ;
 
 
@@ -169,6 +172,11 @@ boolExp
 boolVal
     : (SUBT)? DIGIT | ID | TRUE | FALSE | floatFormatDeclaration | TEXT | LPAREN boolExp RPAREN
     ;
+
+condition
+    : IF LPAREN boolExp ((AND | OR) boolExp)? RPAREN 'then' LBRACE codeBlock RBRACE (ELIF LPAREN boolExp ((AND | OR) boolExp)* RPAREN LBRACE codeBlock RBRACE)* (ELSE LBRACE codeBlock RBRACE)?
+    ;
+
 stringFormatDeclaration
     : ASSIGN TEXT
     ;
@@ -212,6 +220,7 @@ VOID : 'void';
 MAIN : 'main';
 IF : 'if';
 ELSE : 'else';
+ELIF : 'else if';
 THEN : 'then';
 RETURN : 'return';
 WHILE : 'while';
