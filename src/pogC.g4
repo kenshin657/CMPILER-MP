@@ -3,8 +3,7 @@ grammar pogC;
 /*PRODUCTION RULES */
 
 prog
-    : mainProg EOF
-    |functionDeclaration? mainProg EOF
+    : functionDeclaration? mainProg EOF
     ;
 
 mainProg
@@ -46,7 +45,7 @@ arg
     ;
 
 codeBlock
-    : (declaration | scan | print | forLoop | operation)*
+    : (declaration | scan | print | forLoop | operation)
     ;
 
 scan
