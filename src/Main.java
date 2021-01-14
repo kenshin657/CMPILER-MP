@@ -28,12 +28,19 @@ public class Main {
     }
 
     public void parse() {
-        PogCLexer lexer = new PogCLexer(this.input);
+        CharStream cs = null;
+        try {
+            cs = CharStreams.fromFileName("src/input.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PogCLexer lexer = new PogCLexer(cs);
         TokenStream ts = new CommonTokenStream(lexer);
         PogCParser parser = new PogCParser(ts);
 
-        //parser.removeErrorListeners();
-        //parser.addErrorListener(new PogCCustomErrorListener());
+        parser.removeErrorListeners();
+        parser.addErrorListener(new PogCCustomErrorListener());
+        parser.setErrorHandler(ExceptionErrorStrategy.INSTANCE);
 
         ParseTree tree = parser.prog();
         ParseTreeWalker walker = new ParseTreeWalker();
@@ -43,8 +50,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
         Main main = new Main();
-        main.getInput();
-        main.setInput();
+//        main.getInput();
+//        main.setInput();
         main.parse();
     }
 }
