@@ -31,7 +31,7 @@ funcInit
     ;
 
 funcExpression
-    : LPAREN funcArgs RPAREN
+    : LPAREN funcArgs? RPAREN SEMICOLON?
     ;
 
 funcArgs
@@ -42,10 +42,20 @@ funcArgs
 arg
     : arg ','
     | dataType ID
+    | ID
+    | DIGIT
+    | DIGIT PERIOD DIGIT+
+    | PERIOD DIGIT+
+    | PERIOD DIGIT+ floatF
+    | DIGIT PERIOD DIGIT+ floatF
     ;
 
 codeBlock
-    : (declaration | scan | print | forLoop | operation)*
+    : (declaration | scan | print | forLoop | operation | functionCall)*
+    ;
+
+functionCall
+    : ID funcExpression
     ;
 
 scan
@@ -53,7 +63,7 @@ scan
     ;
 
 print
-    : PRINT LPAREN TEXT (',' ID)* RPAREN SEMICOLON
+    : PRINT LPAREN TEXT (ADD ID)* RPAREN SEMICOLON
     ;
 
 forLoop
@@ -100,11 +110,17 @@ dataType
     ;
 
 intDeclaration
-    : INT ID intFormatDeclaration
+    : INT ID intFormatDeclaration?
+    | INT ID ASSIGN opr
     ;
 
 floatDeclaration
-    : FLOAT ID ASSIGN floatFormatDeclaration
+    : FLOAT ID floatFormatDeclaration?
+    | floatAssign opr
+    ;
+
+floatAssign
+    : FLOAT ID ASSIGN
     ;
 
 floatF
