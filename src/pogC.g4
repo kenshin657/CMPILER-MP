@@ -45,7 +45,7 @@ arg
     ;
 
 codeBlock
-    : (declaration | scan | print | forLoop | operation)
+    : (declaration | scan | print | forLoop | operation)*
     ;
 
 scan
