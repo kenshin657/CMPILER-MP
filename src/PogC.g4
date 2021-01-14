@@ -48,6 +48,7 @@ arg
     | PERIOD DIGIT+
     | PERIOD DIGIT+ floatF
     | DIGIT PERIOD DIGIT+ floatF
+    | opr
     ;
 
 codeBlock
@@ -67,7 +68,7 @@ print
     ;
 
 forLoop
-    : FOR intDeclaration UPTO (ID | DIGIT) LBRACE codeBlock RBRACE
+    : FOR forDataTypeDeclaration (UPTO | TO) (ID | DIGIT) LBRACE codeBlock RBRACE
     ;
 
 operation
@@ -110,13 +111,22 @@ dataType
     ;
 
 intDeclaration
-    : INT ID intFormatDeclaration?
+    : INT ID intFormatDeclaration
     | INT ID ASSIGN opr
+    | INT ID
     ;
 
+forDataTypeDeclaration
+    : INT ID intFormatDeclaration
+    | INT ID ASSIGN opr
+    | FLOAT ID floatFormatDeclaration
+    ;
+
+
 floatDeclaration
-    : FLOAT ID floatFormatDeclaration?
+    : FLOAT ID floatFormatDeclaration
     | floatAssign opr
+    |FLOAT ID
     ;
 
 floatAssign
