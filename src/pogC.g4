@@ -16,7 +16,7 @@ main
     ;
 
 functionDeclaration
-    : ( funcInit returnExpresion? RBRACE)
+    : ( funcInit returnExpresion? RBRACE)+
     ;
 
 returnExpresion
@@ -46,7 +46,7 @@ arg
     ;
 
 codeBlock
-    : (declaration | scan | print | for | operation)*
+    : (declaration | scan | print | for | operation)+
     ;
 
 scan
@@ -58,7 +58,7 @@ print
     ;
 
 for
-    : FOR intDeclaration UPTO ID LBRACE codeBlock? RBRACE
+    : FOR intDeclaration UPTO (ID | DIGIT) LBRACE codeBlock? RBRACE
     ;
 
 operation
