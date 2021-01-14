@@ -68,7 +68,11 @@ print
     ;
 
 forLoop
-    : FOR forDataTypeDeclaration (UPTO | TO) (ID | DIGIT) LBRACE codeBlock RBRACE
+    : FOR forDataTypeDeclaration (UPTO | TO) (ID | DIGIT) forBlock
+    ;
+
+forBlock
+    : LBRACE codeBlock RBRACE
     ;
 
 operation
@@ -117,9 +121,8 @@ intDeclaration
     ;
 
 forDataTypeDeclaration
-    : INT ID intFormatDeclaration
-    | INT ID ASSIGN opr
-    | FLOAT ID floatFormatDeclaration
+    : INT ID ASSIGN DIGIT+
+    | ID
     ;
 
 
@@ -142,26 +145,33 @@ stringDeclaration
     ;
 
 booleanDeclaration
-    : BOOL ID boolFormatDeclaration
-    | BOOL ID boolFormatDeclaration
+    : BOOL ID boolFormatDeclaration?
     ;
 
 intFormatDeclaration
-    : ASSIGN DIGIT
+    : ASSIGN (SUBT)? DIGIT
     ;
 
 floatFormatDeclaration
-    : DIGIT PERIOD DIGIT+
-    | PERIOD DIGIT+
-    | PERIOD DIGIT+ floatF
-    | DIGIT PERIOD DIGIT+ floatF
+    : ASSIGN DIGIT PERIOD DIGIT+
+    | ASSIGN PERIOD DIGIT+
+    | ASSIGN PERIOD DIGIT+ floatF
+    | ASSIGN DIGIT PERIOD DIGIT+ floatF
     ;
 
 boolFormatDeclaration
     : ASSIGN TRUE
     | ASSIGN FALSE
+    | ASSIGN boolExp
     ;
 
+boolExp
+    : (NOT)? boolVal ((EQUAL_EQUAL | NOTEQUAL | LESSEQ | LT | GREATEQ | GT |) boolVal)? ((AND | OR) boolExp)*
+    ;
+
+boolVal
+    : (SUBT)? DIGIT | ID | TRUE | FALSE | floatFormatDeclaration | TEXT | LPAREN boolExp RPAREN
+    ;
 stringFormatDeclaration
     : ASSIGN TEXT
     ;
@@ -244,6 +254,7 @@ LESSEQ : '<=';
 GREATEQ : '>=';
 TRUE : 'T';
 FALSE : 'F';
+NOT : '!';
 
 /*SPECIAL SYMBOLS*/
 LPAREN : '(';
