@@ -68,7 +68,11 @@ print
     ;
 
 forLoop
-    : FOR forDataTypeDeclaration (UPTO | TO) (ID | DIGIT) LBRACE codeBlock RBRACE
+    : FOR forDataTypeDeclaration (UPTO | TO) (ID | DIGIT) forBlock
+    ;
+
+forBlock
+    : LBRACE codeBlock RBRACE
     ;
 
 operation
@@ -117,9 +121,8 @@ intDeclaration
     ;
 
 forDataTypeDeclaration
-    : INT ID intFormatDeclaration
-    | INT ID ASSIGN opr
-    | FLOAT ID floatFormatDeclaration
+    : INT ID ASSIGN DIGIT+
+    | ID
     ;
 
 
