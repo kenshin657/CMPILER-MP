@@ -13,7 +13,7 @@ public class PogCCustomErrorListener extends BaseErrorListener {
 
 
         if(msg.contains("mismatched input")) {
-            tmp = "PogC Syntax Error found at Line[" + line + "] CharacterPosition[" + charPositionInLine + "]: Please review ";
+            tmp = "PogC Syntax Error found at Line[" + line + "] CharacterPosition[" + charPositionInLine + "]: Please review if ";
 
         } else if (msg.contains("extraneous input")) {
 
