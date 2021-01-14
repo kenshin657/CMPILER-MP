@@ -39,7 +39,7 @@ public class Main {
         PogCParser parser = new PogCParser(ts);
 
         parser.removeErrorListeners();
-        parser.addErrorListener(new PogCCustomErrorListener());
+        parser.addErrorListener(new PogCCustomErrorListener(parser));
 
         ParseTree tree = parser.prog();
         ParseTreeWalker walker = new ParseTreeWalker();
