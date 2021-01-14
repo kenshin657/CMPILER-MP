@@ -8,7 +8,7 @@ prog
     ;
 
 mainProg
-    : main LPAREN RPAREN LBRACE codeBlock? RBRACE
+    : main LPAREN RPAREN LBRACE codeBlock RBRACE
     ;
 
 main
@@ -20,10 +20,10 @@ functionDeclaration
     ;
 
 returnExpresion
-    : return (opr | ID) SEMICOLON
+    : ret (opr | ID) SEMICOLON
     ;
 
-return
+ret
     : RETURN
     ;
 
@@ -46,7 +46,7 @@ arg
     ;
 
 codeBlock
-    : (declaration | scan | print | for | operation)+
+    : (declaration | scan | print | forLoop | operation)*
     ;
 
 scan
@@ -57,7 +57,7 @@ print
     : PRINT LPAREN TEXT (ADD ID)? RPAREN SEMICOLON
     ;
 
-for
+forLoop
     : FOR intDeclaration UPTO (ID | DIGIT) LBRACE codeBlock? RBRACE
     ;
 
