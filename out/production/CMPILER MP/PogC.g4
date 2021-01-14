@@ -1,6 +1,6 @@
 grammar PogC;
 
-/*PRODUCTION RULES */
+/*PRODUCTION RULES send help*/
 
 prog
     : functionDeclaration? mainProg EOF

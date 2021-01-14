@@ -1,14 +1,18 @@
 //correct any minor syntax inconsistencies when necessary (refer to pseudocode's language design)
- main() {
-	int x = 0;
-	float _veryWeirdIdentifier567 = 999.9f;
-	bool y = (5 > 4 && T) || (F && !(x==0));
-	int[] myArray = create int[10];
-	
-	scan("What is the input: " ,x); //ask for user input
-	print("Input: " +x); //print the input
-	
-	for int i = 1 up to 5 {
-		print("Hello world");
-	}
+
+func int myFunction(int x) {
+	int add = x + 50 ++ 1; //syntax error #1
+
+	return int; //syntax error #2
+}
+
+func float myFunctionFloat(float x) {
+	float fTest = (x * 50) + (x * 15)); //syntax error #3
+
+	return fTest * 50 (); //syntax error #4
+}
+
+main() {
+	myFunction(50);
+	myFunctionFloat(50.0f);
 }
