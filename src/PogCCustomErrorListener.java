@@ -8,6 +8,23 @@ import java.util.List;
 
 public class PogCCustomErrorListener extends BaseErrorListener {
 
+    private String generateCustomErrorMessage(String msg, int line, int charPositionInLine, Object offendingSymbol) {
+        String tmp = "";
+
+
+        if(msg.contains("mismatched input")) {
+            tmp = "PogC Syntax Error found at Line[" + line + "] CharacterPosition[" + charPositionInLine + "]: Please review ";
+
+        } else if (msg.contains("extraneous input")) {
+
+        } else if (msg.contains("no viable alternative at")) {
+
+        }
+        else
+            tmp = "PogC Syntax Error Caught";
+        return tmp;
+    }
+
     @Override
     public void syntaxError(Recognizer<?, ?> recognizer,
                             Object offendingSymbol,
@@ -18,5 +35,7 @@ public class PogCCustomErrorListener extends BaseErrorListener {
         List<String> stack = ((Parser)recognizer).getRuleInvocationStack();
         Collections.reverse(stack);
 
+        String err = generateCustomErrorMessage(msg, line, charPositionInLine, offendingSymbol);
+        System.err.println(err);
     }
 }
