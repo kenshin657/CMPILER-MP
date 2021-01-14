@@ -28,7 +28,7 @@ ret
     ;
 
 funcInit
-    : FUNC dataType ID funcExpression LBRACE codeBlock?
+    : FUNC dataType ID funcExpression LBRACE codeBlock
     ;
 
 funcExpression
@@ -58,7 +58,7 @@ print
     ;
 
 forLoop
-    : FOR intDeclaration UPTO (ID | DIGIT) LBRACE codeBlock? RBRACE
+    : FOR intDeclaration UPTO (ID | DIGIT) LBRACE codeBlock RBRACE
     ;
 
 operation
@@ -244,4 +244,5 @@ TO: 'to';
 
 /*SKIPS*/
 SLCOMMENT : '//' ~[\t\r\n]* -> skip;
-WS : [\r\t\n]+ -> skip;
+WS : [ \r\t\n]+ -> skip;
+NEWLINE : ('\r' '\n'? | '\n') -> skip;
