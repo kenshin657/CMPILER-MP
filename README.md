@@ -5,6 +5,8 @@ Phoebe Chen
 Kyle Tagle
 Liyana Dominguez
 
+CMPILER - S12
+
 ## IntelliJ IDEA Setup
 1. Add antlr jar as a libray
 2. Add "gen" folder as a project source
