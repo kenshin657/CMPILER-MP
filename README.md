@@ -19,6 +19,6 @@ CMPILER - S12
 4. Click 'Generate ANTLR Recognizer'
 
 ## How to Run
-1. Press Run
-2. Input Test Case into the Text Box
-3. Press the 'Run' button
+1. Open input.txt found in the srs file.
+2. Input Test Case and Save
+3. Press run button
