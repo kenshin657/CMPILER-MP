@@ -29,8 +29,8 @@ public class PogCCustomErrorListener extends BaseErrorListener {
 
             tmp = "line: " + line + "|pos: " + pos + "| Syntax Error at '" + offendingSymbol +"' "  + "Expected token: " + expected;
         }
-        else if(msg.contains("missing")){
-            tmp = "line: " + line + "|pos: " + pos + "| Missing symbol: " + expected;
+        else if(msg.contains("missing ")){
+            tmp = "line: " + line + "|pos: " + pos + " " + msg;
         }else {
             tmp = "line: " + line + "|pos: " + pos + "| Syntax Error at '";
             tmp += offendingSymbol + "' ";
@@ -46,7 +46,8 @@ public class PogCCustomErrorListener extends BaseErrorListener {
                             String msg,
                             RecognitionException e)
     {
-
+//        List<String> stack = ((Parser)recognizer).getRuleInvocationStack();
+//        Collections.reverse(stack);
         String expected = "";
         if(e != null){
             expected = this.p.getVocabulary().getLiteralName(e.getExpectedTokens().toList().get(0));
@@ -54,6 +55,7 @@ public class PogCCustomErrorListener extends BaseErrorListener {
         String tmp = generateCustomErrorMessage(msg, line, charPositionInLine, this.p.getCurrentToken().getText(), expected);
         System.err.println(tmp);
         app.setError_messages(tmp);
+        System.out.println(msg);
      //  System.err.println(msg);
 
     }

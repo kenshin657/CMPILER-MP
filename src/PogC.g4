@@ -121,7 +121,9 @@ intDeclaration
     ;
 
 forDataTypeDeclaration
-    : INT ID ASSIGN DIGIT+ | ID;
+    : INT ID ASSIGN DIGIT+
+    | ID
+    ;
 
 
 floatDeclaration
