@@ -12,20 +12,7 @@ public class Main {
     private String filePath;
     private CharStream input;
 
-    private void getInput() {
-        try {
-            InputStreamReader r = new InputStreamReader(System.in);
-            BufferedReader br = new BufferedReader(r);
-            System.out.print("Enter test case file path: ");
-            this.filePath = br.readLine();
-        } catch (IOException err) {
-            err.printStackTrace();
-        }
-    }
 
-    private void setInput() throws  Exception{
-        this.input = (CharStream) new ANTLRFileStream(this.filePath);
-    }
 
     public void parse() {
         CharStream cs = null;

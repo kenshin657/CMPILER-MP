@@ -12,5 +12,5 @@ func float myFunctionFloat(float x) {
 
 main() {
 	myFunction(50);
-	myFunctionFloat(50.0f)
+	myFunctionFloat(50.0f);
 }

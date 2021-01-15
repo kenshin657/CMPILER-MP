@@ -2,9 +2,6 @@ import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
-import org.antlr.v4.runtime.misc.IntervalSet;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,19 +16,21 @@ public class PogCCustomErrorListener extends BaseErrorListener {
         String tmp;
         //System.out.println(expected);
         if(msg.contains("mismatched input")) {
-            tmp = "<line: " + line + "|pos: " + pos + "> Syntax Error at '";
-            tmp += offendingSymbol + "' "  + "Expecting symbol: " + expected;
+            tmp = "line: " + line + "|pos: " + pos + "| Unexpected symbol: '";
+            tmp += offendingSymbol + "' "  + "Expected symbol: " + expected;
 
         } else if (msg.contains("extraneous input")) {
-            tmp = "<line: " + line + "|pos: " + pos + "> Syntax Error at '";
-            tmp += offendingSymbol + "' "  + "Expecting symbol: " + expected;
+            tmp = "line: " + line + "|pos: " + pos + " Invalid token at '";
+            tmp += offendingSymbol;
+
         } else if (msg.contains("no viable alternative at")) {
-            tmp = "<line: " + line + "|pos: " + pos + "> Syntax Error at '" + "' "  + "Expecting symbol: " ;
+
+            tmp = "line: " + line + "|pos: " + pos + "| Syntax Error at '" + offendingSymbol +"' "  + "Expected token: " + expected;
         }
         else if(msg.contains("missing")){
-            tmp = "<line: " + line + "|pos: " + pos + "> Syntax Error at '" + offendingSymbol + "' "  + "Expecting symbol: " + expected;
+            tmp = "line: " + line + "|pos: " + pos + "| Missing symbol: " + expected;
         }else
-            tmp = "<line: " + line + "|pos: " + pos + "> Syntax Error at '";
+            tmp = "line: " + line + "|pos: " + pos + "| Syntax Error at '";
             tmp += offendingSymbol + "' ";
 
 
@@ -45,14 +44,15 @@ public class PogCCustomErrorListener extends BaseErrorListener {
                             String msg,
                             RecognitionException e)
     {
-        List<String> stack = ((Parser)recognizer).getRuleInvocationStack();
-        Collections.reverse(stack);
-
-        String str_expecting_tokens = msg.split("expecting ")[1].split("}")[0];
-        str_expecting_tokens = str_expecting_tokens.replace("{", "");
-        String tmp = generateCustomErrorMessage(msg, line, charPositionInLine, this.p.getCurrentToken().getText(), str_expecting_tokens);
-
+//        List<String> stack = ((Parser)recognizer).getRuleInvocationStack();
+//        Collections.reverse(stack);
+        String expected = "";
+        if(e != null){
+            expected = this.p.getVocabulary().getLiteralName(e.getExpectedTokens().toList().get(0));
+        }
+        String tmp = generateCustomErrorMessage(msg, line, charPositionInLine, this.p.getCurrentToken().getText(), expected);
         System.err.println(tmp);
+     //  System.err.println(msg);
 
     }
 }
