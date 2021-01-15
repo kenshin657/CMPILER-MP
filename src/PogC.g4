@@ -52,10 +52,10 @@ arg
     ;
 
 codeBlock
-    : (declaration | scan | print | forLoop | operation | functionCall | condition |while)*
+    : (declaration | scan | print | forLoop | operation | functionCall | condition |whileLoop)*
     ;
 
-while
+whileLoop
     : WHILE ID UPTO DIGIT LBRACE codeBlock RBRACE
     ;
 
