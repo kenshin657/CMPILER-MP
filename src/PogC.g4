@@ -60,7 +60,21 @@ while
     ;
 
 functionCall
-    : ID funcExpression
+    : ID funcCallVal
+    ;
+
+funcCallVal
+    : LPAREN args RPAREN SEMICOLON
+    ;
+args
+    : args ','
+    |ID
+    | DIGIT
+    | DIGIT PERIOD DIGIT+
+    | PERIOD DIGIT+
+    | PERIOD DIGIT+ floatF
+    | DIGIT PERIOD DIGIT+ floatF
+    | opr
     ;
 
 scan
