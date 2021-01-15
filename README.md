@@ -19,4 +19,4 @@ Liyana Dominguez
 ## How to Run
 1. Press Run
 2. Input Test Case into the Text Box
-3. Press the 'Rub' button
+3. Press the 'Run' button
