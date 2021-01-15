@@ -60,7 +60,7 @@ functionCall
     ;
 
 scan
-    : SCAN LPAREN TEXT COMMA ID RPAREN SEMICOLON
+    : SCAN LPAREN TEXT (COMMA ID)? RPAREN SEMICOLON
     ;
 
 print
@@ -121,9 +121,7 @@ intDeclaration
     ;
 
 forDataTypeDeclaration
-    : INT ID ASSIGN DIGIT+
-    | ID
-    ;
+    : INT ID ASSIGN DIGIT+ | ID;
 
 
 floatDeclaration
