@@ -1,5 +1,9 @@
 # CMPILER-MP
-Machine Project was built using IntelliJ IDEA
+Machine Project was built using IntelliJ IDEA by
+
+Phoebe Chen
+Kyle Tagle
+Liyana Dominguez
 
 ## IntelliJ IDEA Setup
 1. Add antlr jar as a libray
