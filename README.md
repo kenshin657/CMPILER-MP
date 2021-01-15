@@ -14,3 +14,5 @@ Machine Project was built using IntelliJ IDEA
 
 ## How to Run
 1. Press Run
+2. Input Test Case in the left Text Box of the GUI
+3. Press the 'PARSE' button
