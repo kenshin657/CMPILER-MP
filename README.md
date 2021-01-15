@@ -4,7 +4,7 @@ Machine Project was built using IntelliJ IDEA
 ## IntelliJ IDEA Setup
 1. Add antlr jar as a libray
 2. Add "gen" folder as a project source
-3.
+3. Add javafx files as a dependency
 
 ## ANTLR Setup
 1. Enter 'Ctrl+Alt+S'
