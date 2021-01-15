@@ -19,7 +19,7 @@ functionDeclaration
     ;
 
 returnExpresion
-    : ret (opr | ID) SEMICOLON
+    : ret (ID | opr) SEMICOLON
     ;
 
 ret
@@ -222,7 +222,7 @@ IF : 'if';
 ELSE : 'else';
 ELIF : 'else if';
 THEN : 'then';
-RETURN : 'return';
+RETURN : 'return ';
 WHILE : 'while';
 FUNC : 'func';
 PRINT : 'print';

@@ -8,20 +8,22 @@ import java.util.List;
 public class PogCCustomErrorListener extends BaseErrorListener {
 
     Parser p;
-    public PogCCustomErrorListener(Parser p) {
+    Main app;
+    public PogCCustomErrorListener(Parser p, Main app) {
         this.p = p;
+        this.app = app;
     }
 
     private String generateCustomErrorMessage(String msg, int line, int pos, String offendingSymbol, String expected) {
-        String tmp;
-        //System.out.println(expected);
+        String tmp = "";
+        System.out.println(expected);
         if(msg.contains("mismatched input")) {
             tmp = "line: " + line + "|pos: " + pos + "| Unexpected symbol: '";
-            tmp += offendingSymbol + "' "  + "Expected symbol: " + expected;
+            tmp += offendingSymbol + "' "; // + "Expected symbol: " + expected;
 
         } else if (msg.contains("extraneous input")) {
             tmp = "line: " + line + "|pos: " + pos + " Invalid token at '";
-            tmp += offendingSymbol;
+            tmp += offendingSymbol + "'";
 
         } else if (msg.contains("no viable alternative at")) {
 
@@ -29,10 +31,11 @@ public class PogCCustomErrorListener extends BaseErrorListener {
         }
         else if(msg.contains("missing")){
             tmp = "line: " + line + "|pos: " + pos + "| Missing symbol: " + expected;
-        }else
+        }else{
+
             tmp = "line: " + line + "|pos: " + pos + "| Syntax Error at '";
             tmp += offendingSymbol + "' ";
-
+        }
 
         return tmp;
     }
@@ -52,6 +55,7 @@ public class PogCCustomErrorListener extends BaseErrorListener {
         }
         String tmp = generateCustomErrorMessage(msg, line, charPositionInLine, this.p.getCurrentToken().getText(), expected);
         System.err.println(tmp);
+        app.setError_messages(tmp);
      //  System.err.println(msg);
 
     }
