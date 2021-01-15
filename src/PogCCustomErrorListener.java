@@ -53,9 +53,9 @@ public class PogCCustomErrorListener extends BaseErrorListener {
             expected = this.p.getVocabulary().getLiteralName(e.getExpectedTokens().toList().get(0));
         }
         String tmp = generateCustomErrorMessage(msg, line, charPositionInLine, this.p.getCurrentToken().getText(), expected);
+//        System.err.println(tmp);
+       // app.setError_messages("line: " + line + ":" + "charPositionInLine" + msg);
         System.err.println(tmp);
-        app.setError_messages(tmp);
-        System.out.println(msg);
      //  System.err.println(msg);
 
     }

@@ -15,11 +15,11 @@ main
     ;
 
 functionDeclaration
-    : funcInit returnExpresion? RBRACE
+    : funcInit returnExpresion RBRACE
     ;
 
 returnExpresion
-    : ret (ID | opr) SEMICOLON
+    : ret (ID | opr| VOID) SEMICOLON
     ;
 
 ret
@@ -52,11 +52,29 @@ arg
     ;
 
 codeBlock
-    : (declaration | scan | print | forLoop | operation | functionCall | condition)*
+    : (declaration | scan | print | forLoop | operation | functionCall | condition |while)*
+    ;
+
+while
+    : WHILE ID UPTO DIGIT LBRACE codeBlock RBRACE
     ;
 
 functionCall
-    : ID funcExpression
+    : 'fcall' ID funcCallVal
+    ;
+
+funcCallVal
+    : LPAREN args RPAREN SEMICOLON
+    ;
+args
+    : args ','
+    |ID
+    | DIGIT
+    | DIGIT PERIOD DIGIT+
+    | PERIOD DIGIT+
+    | PERIOD DIGIT+ floatF
+    | DIGIT PERIOD DIGIT+ floatF
+    | opr
     ;
 
 scan
@@ -222,7 +240,7 @@ IF : 'if';
 ELSE : 'else';
 ELIF : 'else if';
 THEN : 'then';
-RETURN : 'return ';
+RETURN : 'return';
 WHILE : 'while';
 FUNC : 'func';
 PRINT : 'print';

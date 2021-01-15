@@ -15,11 +15,11 @@ main
     ;
 
 functionDeclaration
-    : funcInit returnExpresion? RBRACE
+    : funcInit returnExpresion RBRACE
     ;
 
 returnExpresion
-    : ret (ID | opr) SEMICOLON
+    : ret (ID | opr| VOID) SEMICOLON
     ;
 
 ret
@@ -60,7 +60,7 @@ while
     ;
 
 functionCall
-    : ID funcCallVal
+    : 'fcall' ID funcCallVal
     ;
 
 funcCallVal
@@ -240,7 +240,7 @@ IF : 'if';
 ELSE : 'else';
 ELIF : 'else if';
 THEN : 'then';
-RETURN : 'return ';
+RETURN : 'return';
 WHILE : 'while';
 FUNC : 'func';
 PRINT : 'print';
